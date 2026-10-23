@@ -15,9 +15,9 @@ adiv_encod<- function(file) {
     error = function(e) {
       message(paste("Error in file:", files[which(!str_detect(files, "Tabla"))][1]))
       if (length(prueba$encoding) > 1) {
-        return(prueba$encoding[2]) # Return the second encoding if available
+        return(prueba$encoding[2]) 
       } else {
-        return("UTF-8") # Default if no second encoding
+        return("UTF-8") 
       }
     }
   )
@@ -26,7 +26,7 @@ columnerror<-function(file, encod, skip=3){
   tryCatch(
     expr = {
       read.csv(file, fileEncoding = encod, encoding = "UTF-8", skip=skip, na.strings = c("NA", "N/A", ""))
-      return(TRUE) # If the file is read successfully, return TRUE
+      return(TRUE) 
     },
     error = function(e) {
       message(paste("Error reading file:", file))
@@ -37,7 +37,7 @@ columnerror<-function(file, encod, skip=3){
 selecterror<-function(df, columns){
   tryCatch(
     expr= {
-      return(df %>% select(all_of(columns))) # If the columns are selected successfully, return TRUE
+      return(df %>% select(all_of(columns))) 
     },
     error = function(e) {
       return(data.frame(matrix(ncol=length(columns), nrow=0)))
